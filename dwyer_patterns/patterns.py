@@ -1,4 +1,4 @@
-from dwyer_patterns.utils import *
+from utils import *
 from bppy.model.b_thread import b_thread
 from bppy.model.sync_statement import waitFor, request, block, mustFinish
 

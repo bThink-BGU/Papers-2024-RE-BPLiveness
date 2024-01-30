@@ -1,5 +1,5 @@
-from dwyer_patterns.symbolic_bprogram_verifier import SymbolicBProgramVerifier
-from dwyer_patterns.patterns import *
+from symbolic_bprogram_verifier import SymbolicBProgramVerifier
+from patterns import *
 from bppy.model.bprogram import BProgram
 from bppy.model.event_selection.simple_event_selection_strategy import SimpleEventSelectionStrategy
 
