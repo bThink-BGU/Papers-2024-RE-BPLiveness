@@ -1,50 +1,21 @@
 from symbolic_bprogram_verifier import SymbolicBProgramVerifier
-from patterns import *
+from utils import *
+from bppy.model.b_thread import b_thread
+from bppy.model.sync_statement import waitFor, request, block, mustFinish
 from bppy.model.bprogram import BProgram
 from bppy.model.event_selection.simple_event_selection_strategy import SimpleEventSelectionStrategy
+import argparse
+import os
 
+parser = argparse.ArgumentParser()
 
-# pattern = pat_0
-# spec = "F ( G p)"
-# variables_names = ["p", "d"]
+parser.add_argument("--pattern", default="46")
 
-# pattern = pat_8
-# spec = "G !q | F (q & F p)"
-# variables_names = ["q", "p"]
+args = parser.parse_args()
 
+with open(os.path.join("patterns", args.pattern + ".py"), "r") as f:
+    exec(f.read())
 
-# pattern = pat_10
-# spec = "G (!(q & !r) | (!r U (p & !r)))"
-# variables_names = ["q", "p", "r"]
-
-# pattern = pat_23  # TODO: not correct
-# spec = "G !q | F (q & (s U (!p | s)))"
-# variables_names = ["q", "p", "s", "d"]
-
-# pattern = pat_26
-# spec = "G (!p | F s)"
-# variables_names = ["p", "s"]
-
-
-# pattern = pat_28
-# spec = "G (!q | G (!p | F s))"
-# variables_names = ["q", "p", "s"]
-
-# pattern = pat_30
-# spec = "G (!(q & !r) | (r V (!p | r | (!r U (!r & s)))))"
-# variables_names = ["q", "p", "r", "s"]
-
-# pattern = pat_41 # TODO: not correct
-# spec = "G (X (t & F p) | ! (s & X t))"
-# variables_names = ["s", "t", "p"]
-
-pattern = pat_46  # TODO: completeness check doesn't work
-spec = "G (!p | F (s & X t))"
-variables_names = ["p", "s", "t", "d"]
-
-# pattern = pat_48  # TODO: completeness check doesn't work
-# spec = "G (!q | G (!p | (s & X t)))"
-# variables_names = ["q", "p", "s", "t"]
 
 event_list = [Assignment({k: v for k, v in zip(variables_names, values)}) for values in itertools.product([True, False], repeat=len(variables_names))]
 

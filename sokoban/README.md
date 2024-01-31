@@ -1,33 +1,26 @@
-# BPLiveExecution
-Code appendix for the paper "Adding Liveness to Executable
-Specifications"
+## Sokoban
 
-* *Note: the project requires Conda*
+**Note: the project requires Conda**
 
-## Running the code:
-## Installation
 
-1. Clone the project :
+### Installation
+
+
+
+Create a virtual environment and activate it:
 
 ```shell
-git clone https://github.com/tomyaacov/BPLiveExecution.git
+cd sokoban
+conda create --name bp-sokoban python=3.7 --file requirements.txt
+conda activate bp-sokoban
 ```
 
 
-2. Create a virtual environment and activate it:
-
-```shell
-cd BPLiveExecution
-conda create --name BPLiveExecution python=3.7 --file requirements.txt
-source activate BPLiveExecution
-```
-
-
-## Usage
+### Usage
 *IMPORTANT: The evaluation requires a lot of RAM.
 We recommend using a machine with at least 64GB of RAM.*
 
-### Run parameters
+#### Run parameters:
 * map name - the name of the map to run on. one of the following:
     * map_6_8_3
     * map_12_11_1
@@ -51,11 +44,8 @@ We recommend using a machine with at least 64GB of RAM.*
     * map_11_8_2
 * single/multiple requirements - whether to run the single ("0") or multiple ("1") liveness requirements scenario.
 
-### Executing the code
+#### Executing the code
 An example of running the code on the map_6_8_3 map with the single liveness requirement scenario is as follows:
 ```shell
 python main_sokoban.py "map_6_8_3" "0"
 ```
-
-### Output
-The code outputs the runtime of the automata-based and MDP-based methods described in the paper. Additionally, it evaluates the robustness of the MDP-based solution, as described in th paper (requires a lot of RAM).

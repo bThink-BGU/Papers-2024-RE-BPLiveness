@@ -17,6 +17,7 @@ parser.add_argument("--n", default=3)
 parser.add_argument("--k", default=1)
 parser.add_argument("--m", default=1)
 parser.add_argument("--total_timesteps", default=10000)
+parser.add_argument("--repeat", default=5)
 parser.add_argument("--state_mode", default="a")
 parser.add_argument("--reward_mode", default="r")
 
@@ -51,14 +52,14 @@ params["n"] = int(args.n)
 params["k"] = int(args.k)
 params["m"] = int(args.m)
 name = "_".join([str(key) + "_" + str(value) for key, value in vars(args).items()])
-
+repeat = int(args.repeat)
 log_dir = "output/" + name + "/"
-print(log_dir)
+#print(log_dir)
 
 steps = []
 times = []
 
-for i in range(20):
+for i in range(repeat):
     env = gym_env_generator(args.state_mode, args.reward_mode, params["n"], params["m"])
 
     env = Monitor(env, log_dir)
