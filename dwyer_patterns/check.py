@@ -9,7 +9,7 @@ import os
 
 parser = argparse.ArgumentParser()
 
-parser.add_argument("--pattern", default="46")
+parser.add_argument("--pattern", default="44")
 
 args = parser.parse_args()
 
@@ -48,5 +48,4 @@ if result:
 else:
     print("Under assumption - Violation Found! Counterexample:")
     print(explanation_str)
-
 

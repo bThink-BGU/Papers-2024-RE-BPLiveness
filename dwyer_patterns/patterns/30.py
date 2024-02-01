@@ -2,8 +2,8 @@ from utils import *
 from bppy.model.b_thread import b_thread
 from bppy.model.sync_statement import waitFor, request, block, mustFinish
 
-# spec = "G (!(q & !r) | (r V (!p | r | (!r U (!r & s)))))"
-# variables_names = ["q", "p", "r", "s"]
+spec = "G (!(q & !r) | (r V (!p | r | (!r U (!r & s)))))"
+variables_names = ["q", "p", "r", "s"]
 
 @b_thread
 def pattern():  # done
