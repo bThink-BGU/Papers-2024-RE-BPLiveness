@@ -17,17 +17,27 @@ def pattern():
 
         G !q || F(q & (!p W s))
     """
-    e = yield {waitFor: q}
-    if e in Not(s):
-        yield {waitFor: s, block: And(p, Not(s))}
-
-
-
-
-    e = yield {waitFor: Or(Not(q),
-                       And(Not(p), q, Not(s)),
-                       Or(Not(q), Not(s)),
-                       And(q, s)), mustFinish: True}
+    yield {waitFor: And(q, s) }
+    while True:
+        e = yield {waitFor: Or(And(q, s), And(Not(p), q, Not(s))), mustFinish: True}
+        if e in And(q,s):
+            break
+        if e in And(Not(p),q,Not(s)):
+            if non_deterministic(e):
+                continue
+            yield {waitFor: s, block: And(p, Not(s))}
+            break
+    # e = yield {waitFor: q}
+    # if e in Not(s):
+    #     yield {waitFor: s, block: And(p, Not(s))}
+    #
+    #
+    #
+    #
+    # e = yield {waitFor: Or(Not(q),
+    #                    And(Not(p), q, Not(s)),
+    #                    Or(Not(q), Not(s)),
+    #                    And(q, s)), mustFinish: True}
     # if e in Not(q):
     #     if non_deterministic(e):
     #         # 2
@@ -46,14 +56,5 @@ def pattern():
 
 
 
-    yield {waitFor: And(q, s) }
-    while True:
-        e = yield {waitFor: Or(And(q, s), And(Not(p), q, Not(s))), mustFinish: True}
-        if e in And(q,s):
-            break
-        if e in And(Not(p),q,Not(s)):
-            if non_deterministic(e):
-                continue
-            yield {waitFor: s, block: And(p, Not(s))}
-            break
+
 

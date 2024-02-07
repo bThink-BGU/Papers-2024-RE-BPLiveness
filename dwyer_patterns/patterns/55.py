@@ -14,4 +14,13 @@ def pattern():
     LTL:
        G (!q || ((!p || (!r U (!r && s && !z && X((!r && !z) U t)))) U (r || G (!p || (s && !z && X(!z U t))))))
     """
-    pass
+    mf = False
+    while True:
+        yield {waitFor: p, mustFinish: mf}
+        e = yield {waitFor: Or(s, p), block: z, mustFinish: True}
+        if e.p:
+            mf = True
+            continue
+        e = yield {waitFor: Or(t, p), block: z, mustFinish: True}
+        if e.p:
+            mf = True
